@@ -1,0 +1,26 @@
+<div id="leftNav" class="h-screen w-1/6 bg-red-100 opacity-75 flex flex-col  ">
+    <div class="text-center justify-center pt-4 h-16 bg-red-200 shadow-lg">
+        <a class="text-lg text-gray-800 " href="{{ path('admin_dashboard') }}">Admin Dashboard</a>
+    </div>
+    <div class="grid grid-cols-1 gap-2">
+        <h4 class="text-gray-600 font-semibold uppercase  mx-4 mt-4">Ajouter du contenu</h4>
+        <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-file-upload pr-2"></i> Nouveau document</button>
+        </a>
+        <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-chalkboard-teacher pr-2"></i>Nouvelle formation</button>
+        </a>
+        <h4 class="text-gray-600 font-semibold uppercase  mx-4 mt-4">Gestion de l'application</h4>
+        <a href="{{ path('category_manager') }}"
+           class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-archive pr-2"></i> Gérer les catégories</button>
+        </a>
+        <h4 class="text-gray-600 font-semibold uppercase  mx-4 mt-4">Gestion des utilisateurs</h4>
+        <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-user pr-2"></i> Gérer les utilisateurs</button>
+        </a>
+        <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-users pr-2"></i> Gérer les groupes</button>
+        </a>
+    </div>
+</div>

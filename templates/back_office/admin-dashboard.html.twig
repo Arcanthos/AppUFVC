@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-{% endblock %}
-
 {% block title %}
-
+    Admin Dashboard
 {% endblock %}
+
+{% block body %}
+    <div class="h-screen bg-gray-100  flex ">
+        {% include 'components/defaultAdminDashboardNavBar.html.twig' %}
+        <div id="mainSection" class=" h-screen flex w-5/6 justify-end" >
+            {% include 'components/defaultTopNavBar.html.twig' %}
+            <div id="mainContentSection">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
 

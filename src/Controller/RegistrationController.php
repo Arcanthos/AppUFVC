@@ -36,6 +36,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setRoles(['ROLE_USER']);
+            $user->setCoins(0);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

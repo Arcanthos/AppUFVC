@@ -34,6 +34,21 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $coins;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -50,6 +65,38 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCoins()
+    {
+        return $this->coins;
+    }
+
+    public function setCoins($coins): void
+    {
+        $this->coins = $coins;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+
+    public function setFirstname($firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
 
     /**
      * A visual identifier that represents this user.
