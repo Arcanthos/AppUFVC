@@ -6,7 +6,7 @@
     <div class="h-screen w-screen bg-gray-100 ">
         {% include 'components/defaultTopNavBar.html.twig' %}
         <div class="w-full flex p-4 ">
-            <div id="TagList" class="p-4 w-1/2 rounded-lg bg-white mr-4">
+            <div id="TagList" class="p-4 w-1/2 rounded-lg bg-white mr-4 ">
                 {% for category in tagsCategory %}
                     <h3 class="font-bold text-gray-700">{{ category.name }}</h3>
                     {% for tag in tags %}
@@ -57,7 +57,6 @@
                     </div>
                     {{ form_end(newTagForm) }}
                 </div>
-
             </div>
         </div>
     </div>

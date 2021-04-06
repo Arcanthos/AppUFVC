@@ -50,7 +50,6 @@ class Ressource
     private $cover_path;
 
 
-
     /**
      *  @Assert\File(
      *     mimeTypes={"application/pdf","application/x-pdf"},
@@ -68,6 +67,11 @@ class Ressource
      * @ORM\Column(type="array", nullable=true)
      */
     private $tags = [];
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $createAt;
 
     /**
      * @return mixed
@@ -216,6 +220,22 @@ class Ressource
     public function setTags(array $tags): void
     {
         $this->tags = $tags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
+    }
+
+    /**
+     * @param mixed $createAt
+     */
+    public function setCreateAt($createAt): void
+    {
+        $this->createAt = $createAt;
     }
 
 

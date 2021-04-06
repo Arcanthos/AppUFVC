@@ -40,6 +40,7 @@ class AddContentController extends AbstractController
 
             $allTags= explode(",", $tags);
             $ressource->setTags($allTags);
+            $ressource->setCreateAt(new \DateTime());
 
             if ($cover) {
                 $originalCoverName = pathinfo($cover->getClientOriginalName(), PATHINFO_FILENAME);

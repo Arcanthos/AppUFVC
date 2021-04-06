@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Boutique
+{% endblock %}
+
+{% block body %}
+
+    <div class="bg-gray-100 min-h-screen w-screen flex flex-col ">
+        {% include 'components/shopNavBar.html.twig' %}
+        {% include 'components/shopFilterBar.html.twig' %}
+        <div class="flex flex-col flex-wrap px-4 pt-4">
+            <div>
+                <h4 class="font-semibold text-gray-600">Animations </h4>
+                <div class="flex flex-wrap">
+                    {% for ressource in allRessources %}
+                        <div class="productCard bg-white flex flex-col h-96 w-64 rounded-lg shadow m-4 hover:shadow-xl ">
+                            <div class="cardImage h-48 bg-cover bg-center rounded-t-lg"
+                                 style='background-image: url("{{ asset(shop_covers_path ~ ressource.coverPath) }}")'
+                            >
+
+                            </div>
+                            <div class="flex flex-col">
+                                <h4 class="font-semibold text-gray-600 p-4">{{ ressource.name }}</h4>
+                                <div>
+                                    <button class=" py-2 px-6 bg-yellow-400 text-gray-600 rounded-2xl">{{ ressource.price }} <i class="fas fa-coins"></i></button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
