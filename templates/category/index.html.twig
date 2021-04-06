@@ -3,12 +3,31 @@
 {% block title %}Gestion des catégories de documents{% endblock %}
 
 {% block body %}
-    {% include 'components/defaultTopNavBar.html.twig' %}
+    <div class="bg-gradient-to-r from-yellow-200 via-red-200 to-pink-300 w-screen h-screen">
+        {% include 'components/defaultTopNavBar.html.twig' %}
+        <div id="DocumentCategoryCard " class="rounded p-4 ">
+            <div class="grid grid-cols-2 gap-4  ">
+                <div class="bg-white p-4 rounded shadow">Catégories</div>
+                <div class=" bg-white p-4 rounded shadow">Sous-catégories</div>
+                {% for category in allCategory %}
+                    <div class="bg-white">
+                        {{ category.name }}
+                    </div>
+                    <div class="bg-white">
+                        {% for subcategory in allSubCategory %}
+                            {% if subcategory.parentCategory.id == category.id %}
+                            <div>{{ subcategory.name }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="bg-white p-4">
 
-    <div class="container">
-        <div id="DocumentCategoryCard" class="">
-
+                </div>
+            </div>
         </div>
     </div>
-
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

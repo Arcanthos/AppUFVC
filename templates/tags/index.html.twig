@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des tags{% endblock %}
+
+{% block body %}
+    <div class="h-screen w-screen bg-gray-100 ">
+        {% include 'components/defaultTopNavBar.html.twig' %}
+        <div class="w-full flex p-4 ">
+            <div id="TagList" class="p-4 w-1/2 rounded-lg bg-white mr-4">
+                {% for category in tagsCategory %}
+                    <h3 class="font-bold text-gray-700">{{ category.name }}</h3>
+                    {% for tag in tags %}
+                        {% if tag.category.name == category.name %}
+                        <h4>{{ tag.name}}</h4>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+                {% endfor %}
+            </div>
+            <div id="TagForm" class="p-4 bg-white w-1/2 rounded-lg">
+                <div class="mb-4 ">
+                    {{ form_start(newCategoryTagForm) }}
+                    <div>
+                        <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Nouvelle Famille de Tag</h2>
+                    </div>
+                    <div class="mb-4">
+                        {{ form_label(newCategoryTagForm.name, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                        <br>
+                        {{ form_widget(newCategoryTagForm.name,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    </div>
+                    <div>
+                        <button class="bg-red-100 px-4 py-3 rounded-xl text-gray-700 font-semibold hover:bg-red-200"
+                                type="submit">Nouvelle Categorie
+                        </button>
+                    </div>
+                    {{ form_end(newCategoryTagForm) }}
+                </div>
+                <div class="">
+                    {{ form_start(newTagForm) }}
+                    <div>
+                        <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Nouveau Tag</h2>
+                    </div>
+                    <div>
+                        {{ form_label(newTagForm.name, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                        <br>
+                        {{ form_widget(newTagForm.name,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_label(newTagForm.category, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                        <br>
+                        {{ form_widget(newTagForm.category,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    </div>
+                    <div>
+                        <button class="bg-red-100 px-4 py-3 rounded-xl text-gray-700 font-semibold hover:bg-red-200"
+                                type="submit">Nouveau Tag
+                        </button>
+                    </div>
+                    {{ form_end(newTagForm) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

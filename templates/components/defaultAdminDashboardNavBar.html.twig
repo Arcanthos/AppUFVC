@@ -4,7 +4,7 @@
     </div>
     <div class="grid grid-cols-1 gap-2">
         <h4 class="text-gray-600 font-semibold uppercase  mx-4 mt-4">Ajouter du contenu</h4>
-        <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+        <a href="{{ path('add_new_content') }}" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
             <button><i class="fas fa-file-upload pr-2"></i> Nouveau document</button>
         </a>
         <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
@@ -14,6 +14,10 @@
         <a href="{{ path('category_manager') }}"
            class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
             <button><i class="fas fa-archive pr-2"></i> Gérer les catégories</button>
+        </a>
+        <a href="{{ path('tags_manager') }}"
+           class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">
+            <button><i class="fas fa-tags pr-2"></i> Gérer les tags</button>
         </a>
         <h4 class="text-gray-600 font-semibold uppercase  mx-4 mt-4">Gestion des utilisateurs</h4>
         <a href="#" class="bg-white px-4 py-2 mx-4 rounded text-gray-700 font-semibold shadow hover:shadow-lg">

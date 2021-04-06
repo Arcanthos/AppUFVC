@@ -1,9 +1,20 @@
-<div id="topNav" class=" h-16 bg-white w-full align-middle flex content-center  justify-end shadow-lg">
-    <div class="px-6  pt-4 h-16">
-        <p class="font-bold text-blue-300">Hello {{ app.user.firstname }}</p>
+<div id="topNav" class=" h-16 bg-white w-full align-middle flex justify-between content-center shadow-lg">
+    <div>
+        <div class="pt-5 h-16 px-4">
+            <a href="{{ path('admin_dashboard') }}" class="bg-red-100 text-gray-600 py-3 px-3 rounded-lg">
+                <button>Panneau admin</button>
+            </a>
+        </div>
     </div>
-    <div class="pt-4 h-16 ">
-        <a class="text-gray-500 hover:underline pr-4 " href="{{ path('app_logout') }}">Se déconnecter</a>
+
+    <div class="flex">
+        <div class="px-6  pt-5 h-16">
+            <p class="font-bold text-blue-300">Hello {{ app.user.firstname }}</p>
+        </div>
+        <div class="pt-5 h-16 ">
+            <a class="text-gray-500 hover:underline pr-4 " href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
     </div>
+
 
 </div>

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Créer un nouveau Produit
+{% endblock %}
+
+{% block body %}
+    <div class="bg-gradient-to-r from-yellow-200 via-red-200 to-pink-300 w-screen h-screen flex flex-col  items-center">
+        {% include 'components/defaultTopNavBar.html.twig' %}
+
+        <div class="w-1/2 flex flex-col justify-center">
+            {{ form_start(newRessourceForm) }}
+            <div class="container bg-white flex flex-col justify-center rounded-lg shadow-xl py-12 px-8 mt-4">
+                <div>
+                    <h1 class="text-xl font-bold text-center text-gray-800 mb-4">Nouveau Document</h1>
+                </div>
+                <br>
+                <div class="mb-4">
+                    {{ form_label(newRessourceForm.cover, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                    <br>
+                    {{ form_widget(newRessourceForm.cover) }}
+                </div>
+                <div class="flex mb-4">
+                    <div class="w-1/2">
+                        {{ form_label(newRessourceForm.name, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                        <br>
+                        {{ form_widget(newRessourceForm.name,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    </div>
+                    <div class="w-1/2">
+                        {{ form_label(newRessourceForm.price, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                        <br>
+                        {{ form_widget(newRessourceForm.price,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    {{ form_label(newRessourceForm.category, null, {'label_attr':{'class':'font-semibold text-gray-700'}}) }}
+                    <br>
+                    {{ form_widget(newRessourceForm.category,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_label(newRessourceForm.file, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
+                    <br>
+                    {{ form_widget(newRessourceForm.file) }}
+                </div>
+                <div class="mb-4">
+                    <label class="font-semibold text-gray-700" for="tags">Tags</label>
+                    {{ form_widget(newRessourceForm.tags) }}
+                    <div id="tagToSelect" class="bg-red-50 w-full rounded flex flex-wrap p-4 max-h-48 ">
+                        {% for category in tagCategoryList %}
+                            {% for tag in tagList %}
+                                {% if tag.category.id == category.id %}
+                                    <div class="mx-1 ">
+                                        <button type="button"
+                                                class="tagBtn text-sm bg-gray-400 text-white p-1 my-1 rounded  hover:bg-gray-600  hover:shadow-xl "
+                                                value="{{ tag.id }}">{{ tag.name }}</button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <button type="submit"
+                            class="bg-red-100 px-4 py-3 rounded-xl text-gray-700 font-semibold hover:bg-red-200  ">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(newRessourceForm) }}
+    </div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/SelectTag.js') }}"></script>
+{% endblock %}
+
+

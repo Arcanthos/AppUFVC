@@ -29,6 +29,9 @@ Encore
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 
+    //add JQUERY
+    .autoProvidejQuery()
+
     //enable PostCSS
     .enablePostCssLoader()
 
