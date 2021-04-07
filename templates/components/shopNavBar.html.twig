@@ -1,10 +1,10 @@
-<div class="flex bg-gray-800 text-blue-300 h-16 w-full justify-between shadow-lg">
+<div class="flex bg-white text-gray-700 h-16 w-full justify-between shadow-lg static ">
     <div class="flex">
         <p class="font-semibold text-2xl px-4 py-4">APPUFCV</p>
     </div>
     <div class="flex">
         <div class="h-16 pt-5 px-4 mx-4">
-            <a href="{{ path('client_shop') }}" class="font-bold text-white px-4">La Boutique</a>
+            <a href="{{ path('client_shop') }}" class="font-bold text-red-300 px-4">La Boutique</a>
             <a href="{{ path('client_chest') }}">Ma Bibliothèque</a>
         </div>
     </div>
@@ -13,15 +13,19 @@
             <p class="font-bold text-blue-300">Hello {{ app.user.firstname }}</p>
         </div>
         <div class="h-16 mr-4 pt-4 ">
-            <p class="text-yellow-400 text-center align-middle px-4 py-1 rounded border border-yellow-400">{{ app.user.coins }} <i class="fas fa-coins"></i></p>
-        </div>
-        <div class="pt-5 h-16 ">
-            <a class="text-gray-300 hover:underline pr-4 " href="{{ path('app_logout') }}">Se déconnecter</a>
+            <p class="text-yellow-400 text-center align-middle px-4 py-1 rounded border border-yellow-400">{{ app.user.coins }} <i class="fas fa-coins "></i></p>
         </div>
 
-        <div class="pt-5 h-16 pl-4 pr-4" >
-            <button><i class="fas fa-chevron-down"></i></button>
+        <div id="secondaryNavBtn" class="pt-5 h-16 pl-4 pr-4 focus:outline-none" >
+            <button><i id="secondaryNavIcon" class="fas fa-chevron-down"></i></button>
         </div>
     </div>
-
 </div>
+<div id="secondaryNav" class="bg-white text-gray-700 text-sm  flex flex-col p-4  w-48 absolute top-16 right-0 rounded-b-lg shadow-lg hidden">
+    <a class="hover:underline py-2" href="#">Mon profil</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="hover:underline py-2" href="{{ path('admin_dashboard') }}">Admin dashboard</a>
+    {% endif %}
+    <a class="hover:underline py-2" href="{{ path('app_logout') }}">Se déconnecter</a>
+</div>
+

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RessourceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -63,15 +65,27 @@ class Ressource
      */
     private  $file_path;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $tags = [];
+
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
     private $createAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="ressources")
+     */
+    private $tags;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -207,22 +221,6 @@ class Ressource
 
 
     /**
-     * @return array
-     */
-    public function getTags(): array
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param array $tags
-     */
-    public function setTags(array $tags): void
-    {
-        $this->tags = $tags;
-    }
-
-    /**
      * @return mixed
      */
     public function getCreateAt()
@@ -236,6 +234,42 @@ class Ressource
     public function setCreateAt($createAt): void
     {
         $this->createAt = $createAt;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
 

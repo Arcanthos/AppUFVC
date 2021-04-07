@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="bg-gradient-to-r from-yellow-200 via-red-200 to-pink-300 w-screen h-screen flex flex-col  items-center">
+    <div class="bg-gradient-to-r from-yellow-200 via-red-200 to-pink-300 w-full min-h-screen flex flex-col  items-center">
         {% include 'components/defaultTopNavBar.html.twig' %}
 
         <div class="w-1/2 flex flex-col justify-center">
@@ -21,22 +21,27 @@
                     {{ form_widget(newRessourceForm.cover) }}
                 </div>
                 <div class="flex mb-4">
-                    <div class="w-1/2">
+                    <div class="w-1/2 pr-2">
                         {{ form_label(newRessourceForm.name, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
                         <br>
-                        {{ form_widget(newRessourceForm.name,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                        {{ form_widget(newRessourceForm.name,{'attr': {'class': 'rounded bg-red-50 h-8 w-full focus:bg-red-100'}}) }}
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-1/2  pl-2">
                         {{ form_label(newRessourceForm.price, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
                         <br>
-                        {{ form_widget(newRessourceForm.price,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                        {{ form_widget(newRessourceForm.price,{'attr': {'class': 'rounded bg-red-50 h-8  w-full focus:bg-red-100'}}) }}
                     </div>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 w-1/2 pr-2">
                     {{ form_label(newRessourceForm.category, null, {'label_attr':{'class':'font-semibold text-gray-700'}}) }}
                     <br>
-                    {{ form_widget(newRessourceForm.category,{'attr': {'class': 'rounded bg-red-50 h-8  focus:bg-red-100'}}) }}
+                    {{ form_widget(newRessourceForm.category,{'attr': {'class': 'rounded bg-red-50 h-8 w-full focus:bg-red-100'}}) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_label(newRessourceForm.description, null, {'label_attr':{'class':'font-semibold text-gray-700'}}) }}
+                    <br>
+                    {{ form_widget(newRessourceForm.description,{'attr': {'class': 'rounded bg-red-50 h-16 w-full focus:bg-red-100'}}) }}
                 </div>
                 <div class="mb-4">
                     {{ form_label(newRessourceForm.file, null, {'label_attr':{'class':' font-semibold text-gray-700'}}) }}
@@ -76,6 +81,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('scripts/SelectTag.js') }}"></script>
+    <script src="{{ asset('scripts/toggleSecondaryNavCLientShop.js') }}"></script>
 {% endblock %}
 
 

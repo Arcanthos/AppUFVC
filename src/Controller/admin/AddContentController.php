@@ -39,7 +39,11 @@ class AddContentController extends AbstractController
             $tags = $form->get('tags')->getData();
 
             $allTags= explode(",", $tags);
-            $ressource->setTags($allTags);
+            foreach ($allTags as $tagId){
+                $tag = $tagRepository->find($tagId);
+                $ressource->addTag($tag);
+            }
+
             $ressource->setCreateAt(new \DateTime());
 
             if ($cover) {

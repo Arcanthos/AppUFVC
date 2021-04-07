@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,6 +48,9 @@ class RessourceType extends AbstractType
             ])
             ->add('tags', HiddenType::class,[
                 'mapped'=>false
+            ])
+            ->add('description', TextareaType::class,[
+                'label' => 'Description du document'
             ])
         ;
     }
