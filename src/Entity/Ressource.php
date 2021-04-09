@@ -82,9 +82,25 @@ class Ressource
      */
     private $description;
 
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity=RessourcePack::class, mappedBy="ressources")
+     */
+    private $ressourcePacks;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Chest::class, mappedBy="ressources")
+     */
+    private $chests;
+
+
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->ressourcePacks = new ArrayCollection();
+        $this->chests = new ArrayCollection();
     }
 
     /**
@@ -271,6 +287,64 @@ class Ressource
 
         return $this;
     }
+
+
+
+    /**
+     * @return Collection|RessourcePack[]
+     */
+    public function getRessourcePacks(): Collection
+    {
+        return $this->ressourcePacks;
+    }
+
+    public function addRessourcePack(RessourcePack $ressourcePack): self
+    {
+        if (!$this->ressourcePacks->contains($ressourcePack)) {
+            $this->ressourcePacks[] = $ressourcePack;
+            $ressourcePack->addRessource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRessourcePack(RessourcePack $ressourcePack): self
+    {
+        if ($this->ressourcePacks->removeElement($ressourcePack)) {
+            $ressourcePack->removeRessource($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chest[]
+     */
+    public function getChests(): Collection
+    {
+        return $this->chests;
+    }
+
+    public function addChest(Chest $chest): self
+    {
+        if (!$this->chests->contains($chest)) {
+            $this->chests[] = $chest;
+            $chest->addRessource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChest(Chest $chest): self
+    {
+        if ($this->chests->removeElement($chest)) {
+            $chest->removeRessource($this);
+        }
+
+        return $this;
+    }
+
+
 
 
 

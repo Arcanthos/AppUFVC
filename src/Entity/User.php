@@ -50,6 +50,8 @@ class User implements UserInterface
     private $firstname;
 
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -143,6 +145,8 @@ class User implements UserInterface
         return $this;
     }
 
+
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -162,6 +166,8 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
 
 
 }

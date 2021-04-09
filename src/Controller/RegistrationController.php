@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Chest;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\DefaultAuthenticator;
@@ -25,6 +26,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, DefaultAuthenticator $authenticator): Response
     {
         $user = new User();
+        $chest = new Chest();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -38,8 +40,10 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles(['ROLE_USER']);
             $user->setCoins(0);
+            $chest->setOwner($user);
 
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($chest);
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

@@ -1,10 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
-{% endblock %}
-
 {% block title %}
-
+    Ma bibliothèque
 {% endblock %}
+
+{% block body %}
+<div class="bg-white min-h-screen w-screen flex flex-col ">
+    {% include 'components/chestNavBar.html.twig' %}
+    {% include 'components/shopFilterBar.html.twig' %}
+    <div class="flex flex-col flex-wrap px-4 pt-4">
+        <div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
 
