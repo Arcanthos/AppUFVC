@@ -6,40 +6,58 @@
 
 {% block body %}
 
-    <div class="bg-white min-h-screen w-screen flex flex-col ">
+    <div class=" bg-green-300 sm:bg-white min-h-screen w-full flex flex-col ">
         {% include 'components/shopNavBar.html.twig' %}
         {% include 'components/shopFilterBar.html.twig' %}
+        {% include 'components/mobileFloatingMenu.html.twig' %}
         <div class="flex flex-col flex-wrap px-4 pt-4">
+            {% for category in allCategory %}
             <div>
+                {% set countRessource = 0 %}
+                {% for ressource in allRessources %}
+                    {% if ressource.category.name == category.name %}
+                        {% set countRessource =+1 %}
+                    {% endif %}
+                {% endfor %}
+
+
+                {% if not countRessource == 0 %}
                 <div class="flex pl-4">
-                    <h4 class="font-semibold text-white bg-indigo-500 rounded-lg mt-2 py-1 px-2 uppercase">Animations </h4>
+                    <h4 class="font-semibold text-white bg-indigo-500 rounded-lg mt-2 py-1 px-2 uppercase">
+                        {{ category.name }} </h4>
                 </div>
+                {% endif %}
 
                 <div class="flex flex-wrap">
                     {% for ressource in allRessources %}
-                        <div class="productCard bg-white  flex flex-col h-96 w-64 rounded-lg shadow-lg m-4 hover:shadow-xl   ">
-                            <div class="cardImage h-48 bg-cover bg-center rounded-t-lg"
+                        {% if ressource.category.name == category.name %}
+                        <div class="productCard bg-white  h-32 w-full flex sm:flex-col sm:h-96 sm:w-64  rounded-lg shadow-lg m-4 hover:shadow-xl ">
+                            <div class="cardImage h-64   sm:h-48 sm:w-full bg-cover bg-center rounded-t-lg"
                                  style='background-image: url("{{ asset(shop_covers_path ~ ressource.coverPath) }}")'
                             >
                             </div>
                             <div class="flex flex-col flex-grow p-4">
                                 <h4 class="font-semibold text-gray-700 ">{{ ressource.name }}</h4>
                                 <div class="flex-grow ">
-                                    <div class="flex flex-wrap content-center pt-2">
+                                    <div class="flex flex-wrap content-center py-2 sm:pt-2">
                                         {% for tag in ressource.tags %}
                                             <button class="tagBtn text-xs bg-yellow-400 text-gray-700 p-1 mr-1 mb-1 rounded">{{ tag.name }}</button>
                                         {% endfor %}
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a href="{{ path('buy_this_items',{id: ressource.id}) }}"><button class="py-2 w-full bg-green-300 text-gray-700 rounded-3xl shadow">{{ ressource.price }}
-                                        <i class="fas fa-coins"></i></button></a>
+                                    <a href="{{ path('buy_this_items',{id: ressource.id}) }}">
+                                        <button class="py-2 w-full bg-green-300 text-gray-700 rounded-3xl shadow">{{ ressource.price }}
+                                            <i class="fas fa-coins"></i></button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 

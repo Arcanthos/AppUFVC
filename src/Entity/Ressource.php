@@ -89,10 +89,7 @@ class Ressource
      */
     private $ressourcePacks;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Chest::class, mappedBy="ressources")
-     */
-    private $chests;
+
 
 
 
@@ -317,32 +314,7 @@ class Ressource
         return $this;
     }
 
-    /**
-     * @return Collection|Chest[]
-     */
-    public function getChests(): Collection
-    {
-        return $this->chests;
-    }
 
-    public function addChest(Chest $chest): self
-    {
-        if (!$this->chests->contains($chest)) {
-            $this->chests[] = $chest;
-            $chest->addRessource($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChest(Chest $chest): self
-    {
-        if ($this->chests->removeElement($chest)) {
-            $chest->removeRessource($this);
-        }
-
-        return $this;
-    }
 
 
 

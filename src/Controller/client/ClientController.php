@@ -2,7 +2,8 @@
 
 namespace App\Controller\client;
 
-use App\Repository\ChestRepository;
+
+use App\Repository\DocumentCategoryRepository;
 use App\Repository\RessourceRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,23 +11,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ClientController extends AbstractController
 {
     /**
      * @Route("/client/shop", name="client_shop")
      * @param RessourceRepository $ressourceRepository
      * @param TagRepository $tagRepository
+     * @param DocumentCategoryRepository $categoryRepository
      * @return Response
      */
-    public function shop(RessourceRepository $ressourceRepository, TagRepository $tagRepository): Response
+    public function shop(RessourceRepository $ressourceRepository, TagRepository $tagRepository, DocumentCategoryRepository $categoryRepository): Response
     {
         $allRessources = $ressourceRepository->findAll();
         $tags = $tagRepository->findAll();
+        $allCategory = $categoryRepository->findAll();
+
 
 
         return $this->render('client/shop.html.twig', [
             'controller_name' => 'ClientController',
             'allRessources' => $allRessources,
+            'allCategory' => $allCategory,
             'tags' => $tags
         ]);
     }
@@ -35,30 +41,33 @@ class ClientController extends AbstractController
      * @Route("/client/shop/buy/{id}", name="buy_this_items")
      * @param $id
      * @param RessourceRepository $ressourceRepository
-
      * @param EntityManagerInterface $entityManager
      */
-    public function buyOneItems($id, RessourceRepository $ressourceRepository, EntityManagerInterface $entityManager)
+    public function buyOneItems($id, RessourceRepository $ressourceRepository,  EntityManagerInterface $entityManager)
     {
         $user = $this->getUser();
 
-        $chestToUpdate = $user->getChest();
         $itemToBuy = $ressourceRepository->find($id);
 
-        if ($itemToBuy) {
+        foreach ($user->getLibrary() as $library)   {
+            if ($library ==  $itemToBuy){
+                $this->addFlash('warning','Cet item est déja dans votre bibliothèque');
+                return $this->redirectToRoute('client_shop');
+            }
+        }
 
+        if ($itemToBuy) {
             if ($itemToBuy->getPrice() <= $user->getCoins()) {
-                $chestToUpdate->addRessource($itemToBuy);
                 $user->setCoins($user->getCoins() - $itemToBuy->getPrice());
-                $entityManager->persist($chestToUpdate);
+                $user->addLibrary($itemToBuy);
                 $entityManager->flush();
             }else{
                 $this->addFlash('warning','Crédits insuffisants');
-                $this->redirectToRoute('client_shop');
+                return $this->redirectToRoute('client_shop');
             }
-
             $this->addFlash('success','Achat effectué');
         }
+        return $this->redirectToRoute('client_chest');
     }
 
     /**

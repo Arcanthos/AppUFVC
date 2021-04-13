@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -48,6 +50,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Ressource::class)
+     */
+    private $library;
+
+    public function __construct()
+    {
+        $this->library = new ArrayCollection();
+    }
 
 
 
@@ -165,6 +177,30 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Ressource[]
+     */
+    public function getLibrary(): Collection
+    {
+        return $this->library;
+    }
+
+    public function addLibrary(Ressource $library): self
+    {
+        if (!$this->library->contains($library)) {
+            $this->library[] = $library;
+        }
+
+        return $this;
+    }
+
+    public function removeLibrary(Ressource $library): self
+    {
+        $this->library->removeElement($library);
+
+        return $this;
     }
 
 
