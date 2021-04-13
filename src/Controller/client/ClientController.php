@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClientController extends AbstractController
 {
+
     /**
      * @Route("/client/shop", name="client_shop")
      * @param RessourceRepository $ressourceRepository
@@ -23,16 +24,17 @@ class ClientController extends AbstractController
      */
     public function shop(RessourceRepository $ressourceRepository, TagRepository $tagRepository, DocumentCategoryRepository $categoryRepository): Response
     {
+        $user = $this->getUser();
         $allRessources = $ressourceRepository->findAll();
         $tags = $tagRepository->findAll();
         $allCategory = $categoryRepository->findAll();
-
-
+        $userRessources = $user->getLibrary();
 
         return $this->render('client/shop.html.twig', [
             'controller_name' => 'ClientController',
             'allRessources' => $allRessources,
             'allCategory' => $allCategory,
+            'userRessources' => $userRessources,
             'tags' => $tags
         ]);
     }
@@ -72,11 +74,20 @@ class ClientController extends AbstractController
 
     /**
      * @Route("/client/my-chest", name="client_chest")
+     * @param DocumentCategoryRepository $categoryRepository
+     * @return Response
      */
-    public function myChest(): Response
+    public function myChest(DocumentCategoryRepository $categoryRepository): Response
     {
+        $user = $this->getUser();
+
+        $userRessources = $user->getLibrary();
+        $allCategory = $categoryRepository->findAll();
+
         return $this->render('client/my-chest.html.twig', [
             'controller_name' => 'ClientController',
+            'userRessources' => $userRessources,
+            'allCategory' => $allCategory,
         ]);
     }
 }

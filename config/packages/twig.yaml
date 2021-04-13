@@ -3,3 +3,4 @@ twig:
 
     globals:
         shop_covers_path: 'uploads/covers/'
+        client_ressource_path: 'uploads/files/'

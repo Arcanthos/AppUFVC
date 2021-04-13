@@ -97,7 +97,6 @@ class Ressource
     {
         $this->tags = new ArrayCollection();
         $this->ressourcePacks = new ArrayCollection();
-        $this->chests = new ArrayCollection();
     }
 
     /**

@@ -1,0 +1,43 @@
+{% for category in allCategory %}
+    <div>
+        {% set countRessource = 0 %}
+        {% for ressource in allRessources %}
+            {% if ressource.category.name == category.name %}
+                {% set countRessource =+1 %}
+            {% endif %}
+        {% endfor %}
+
+
+        {% if not countRessource == 0 %}
+            <div class="flex pl-4">
+                <h4 class="font-semibold text-white bg-indigo-500 rounded-lg mt-2 py-1 px-2 uppercase">
+                    {{ category.name }} </h4>
+            </div>
+        {% endif %}
+        <div class="flex flex-wrap">
+            {% for ressource in allRessources %}
+                {% for userRessource in userRessources %}
+                    {% if ressource.category.name == category.name and userRessource.name != ressource.name %}
+                        <div class="productCard bg-white flex flex-col rounded-xl shadow-lg m-4 hover:shadow-xl p-4 w-full">
+                            <h4 class="font-semibold text-gray-700 ">{{ ressource.name }}</h4>
+                            <div class="text-sm text-gray-400">{{ ressource.description }}</div>
+                            <div class="flex flex-wrap">
+                                <div class="flex flex-wrap content-center py-2 pt-2">
+                                    {% for tag in ressource.tags %}
+                                        <button class="tagBtn text-xs bg-yellow-400 text-gray-700 p-1 mr-1 mb-1 rounded">{{ tag.name }}</button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="{{ path('buy_this_items',{id: ressource.id}) }}">
+                                    <button class="py-2 w-1/3 bg-green-300 text-gray-700 rounded-3xl shadow">{{ ressource.price }}
+                                        <i class="fas fa-coins"></i></button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

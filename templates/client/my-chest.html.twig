@@ -9,8 +9,54 @@
     {% include 'components/chestNavBar.html.twig' %}
     {% include 'components/shopFilterBar.html.twig' %}
     <div class="flex flex-col flex-wrap px-4 pt-4">
-        <div>
-        </div>
+        {% for category in allCategory %}
+            <div>
+                {% set countRessource = 0 %}
+                {% for ressource in userRessources %}
+                    {% if ressource.category.name == category.name %}
+                        {% set countRessource =+1 %}
+                    {% endif %}
+                {% endfor %}
+
+
+                {% if not countRessource == 0 %}
+                    <div class="flex pl-4">
+                        <h4 class="font-semibold text-white bg-indigo-500 rounded-lg mt-2 py-1 px-2 uppercase">
+                            {{ category.name }} </h4>
+                    </div>
+                {% endif %}
+
+
+                <div class="flex flex-wrap">
+                    {% for ressource in userRessources %}
+
+                        {% if ressource.category.name == category.name %}
+                            <div class="productCard bg-white  w-full flex sm:flex-col sm:h-96 sm:w-64  rounded-lg shadow-lg m-4 hover:shadow-xl ">
+                                <div class="cardImage h-64   sm:h-48 sm:w-full bg-cover bg-center rounded-t-lg"
+                                     style='background-image: url("{{ asset(shop_covers_path ~ ressource.coverPath) }}")'
+                                >
+                                </div>
+                                <div class="flex flex-col flex-grow p-4">
+                                    <h4 class="font-semibold text-gray-700 ">{{ ressource.name }}</h4>
+                                    <div class="sm:flex-grow ">
+                                        <div class="flex flex-wrap content-center py-2 sm:pt-2">
+                                            {% for tag in ressource.tags %}
+                                                <button class="tagBtn text-xs bg-yellow-400 text-gray-700 p-1 mr-1 mb-1 rounded">{{ tag.name }}</button>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="{{ asset(client_ressource_path ~ ressource.filePath) }}" target="_blank">
+                                            <button class="py-2 w-full bg-green-300 text-gray-700 rounded-3xl shadow">Ouvrir</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
